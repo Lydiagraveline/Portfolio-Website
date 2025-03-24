@@ -3,13 +3,31 @@ import GalleryFilter from './GalleryFilter';
 
 const Gallery = ({ galleryData,  collection, handleFilterChange,  selectedCategory}) => {
   const [clickedImage, setClickedImage] = useState(null);
-  const [imageSources, setImageSources] = useState({}); // State to store image sources for each item
+  // const [imageSources, setImageSources] = useState({}); // State to store image sources for each item
+  const [currentIndex, setCurrentIndex] = useState(0);
   const handleImageClick = (item) => {
     setClickedImage(item);
+    setCurrentIndex(0);
   };
 
-  const closeModal = () => {
-    setClickedImage(null);
+  const handlePrevImage = () => {
+    if (clickedImage.photos) {
+      const newIndex = (currentIndex - 1 + clickedImage.photos.length) % clickedImage.photos.length;
+      setCurrentIndex(newIndex);
+    }
+  };
+
+  const handleNextImage = () => {
+    if (clickedImage.photos) {
+      const newIndex = (currentIndex + 1) % clickedImage.photos.length;
+      setCurrentIndex(newIndex);
+    }
+  };
+
+  const closeModal = (e) => {
+    if (e.target.classList.contains('modalBackground')) {
+      setClickedImage(null);
+    }
   };
 
   useEffect(() => {
@@ -24,57 +42,41 @@ const Gallery = ({ galleryData,  collection, handleFilterChange,  selectedCatego
         });
       }
     });
-  
-    
-    
-    galleryData.forEach((item, index) => {
-      if (item.photos) {
-        handleImageArray(item, index); // Pass index as identifier
-      }
-    });
-  }, [galleryData]); // Run this effect whenever galleryData changes
 
-  const handleImageArray = (item, index) => {
-    let imgIndex = 0; // Initialize index to 0
-    setCurrentImageSrc(index, `../images/${item.folder}/${item.photos[imgIndex]}`);
-    if (item.photos && item.photos.length > 0) {
-      const timer = setInterval(() => {
-        setCurrentImageSrc(index, `../images/${item.folder}/${item.photos[imgIndex]}`);
-        imgIndex++;
-
-        // If index exceeds the length of photos array, reset it to 0
-        if (imgIndex >= item.photos.length) {
-          imgIndex = 0;
-        }
-      }, 5000); // Interval of 5 seconds
+    const body = document.body;
+    if (clickedImage) {
+      body.classList.add('no-scroll');
+    } else {
+      body.classList.remove('no-scroll');
     }
-  };
+  }, [clickedImage]); 
 
-  const setCurrentImageSrc = (index, src) => {
-    console.log(src)
-    setImageSources(prevState => ({
-      ...prevState,
-      [index]: src // Update the image source for the specified index
-    }));
-  };
+  // const handleImageArray = (item, index) => {
+  //   let imgIndex = 0; // Initialize index to 0
+  //   // setCurrentImageSrc(index, `../images/${item.folder}/${item.photos[imgIndex]}`);
+  //   if (item.photos && item.photos.length > 0) {
+  //     // const timer = setInterval(() => {
+  //     //   setCurrentImageSrc(index, `../images/${item.folder}/${item.photos[imgIndex]}`);
+  //     //   imgIndex++;
 
-  // const handleBlur = document.querySelector('.galleryItem')
-  //   handleBlur.forEach(div => {
-  //     const img = div.querySelector('img')
+  //     //   // If index exceeds the length of photos array, reset it to 0
+  //     //   if (imgIndex >= item.photos.length) {
+  //     //     imgIndex = 0;
+  //     //   }
+  //     // }, 5000); // Interval of 5 seconds
+  //   }
+  // };
 
-  //     function loaded( ) {
-  //       div.classList.add('loaded')
-  //     }
-      
-  //     if (img.complete) {
-  //       loaded ()
-  //     } {
-  //       img.addEventListener("load", loaded()
-  //       )
-  //     }
+  
+  // const setCurrentImageSrc = (index, src) => {
+  //   console.log(src)
+  //   setImageSources(prevState => ({
+  //     ...prevState,
+  //     [index]: src // Update the image source for the specified index
+  //   }));
+  // };
 
-  //   })
-
+  // };
 
   return (
     <div className='gallery'  >
@@ -97,35 +99,48 @@ const Gallery = ({ galleryData,  collection, handleFilterChange,  selectedCatego
       </div>
 
        {/* pop-up */}
-         {clickedImage && (
-                <div className="modalBackground" onClick={closeModal}>
-                    <div className="modalContent">
-                    {/* <img src={`../images/${clickedImage.image}`} /> */}
-                    {clickedImage.folder && imageSources[galleryData.indexOf(clickedImage)] && (
-        <img src={imageSources[galleryData.indexOf(clickedImage)]} alt={clickedImage.title} loading="lazy"/>
-      )}
-      {!clickedImage.folder && (
-        <img src={`../images/${clickedImage.image}`} alt={clickedImage.title} loading="lazy"/>
-      )}
-
-                        <div className="artPieceInfo">
-                            <h2>{clickedImage.title}</h2>
-                              {/* button for external project link, if it exists */}
-                         {clickedImage.link && (
-                          <a href={clickedImage.link} target="_blank" rel="noopener noreferrer" className="projectLinkButton">View Project</a>
-                        )}
-
-                                <p>{clickedImage.year}</p>
-                                <p>{clickedImage.medium}</p>
-                                <p>{clickedImage.dimensions}</p>
-                                <p>{clickedImage.description}</p>
-                         </div>
-                        {/* <button onClick={closeModal}>Close</button> */}
-                    </div>
-                </div>
+      {clickedImage && (
+      <div className="modalBackground" onClick={closeModal}>
+        <div className="modalContent">
+       
+        {clickedImage.folder ? (
+              // carousel
+              <img src={`../images/${clickedImage.folder}/${clickedImage.photos[currentIndex]}`} alt={clickedImage.title} loading="lazy"/>
+              ) : (
+              // no carousel
+              <img src={`../images/${clickedImage.key}.jpg`} alt={clickedImage.title} loading="lazy" onError={(e) => {
+                e.target.src = `../images/${clickedImage.key}.gif`;
+              }}/>
             )}
-    </div>
-  );
+
+          <div className="artPieceInfo">
+              
+            {clickedImage.folder && (
+             <div className="imageNavigation">
+                <button className="prevButton" onClick={() => handlePrevImage()}>Prev</button>
+                <button className="nextButton" onClick={() => handleNextImage()}>Next</button>
+              </div>
+            )}
+
+            <h2>{clickedImage.title}</h2>
+            {/* button for external project link, if it exists */}
+            {clickedImage.link && (
+              <a href={clickedImage.link} target="_blank" rel="noopener noreferrer" className="projectLinkButton">View Project</a>
+            )}
+
+            <p>{clickedImage.year}</p>
+            <p>{clickedImage.medium}</p>
+            <p>{clickedImage.dimensions}</p>
+            <p>{clickedImage.description}</p>
+          </div>
+          {/* <button onClick={closeModal}>Close</button> */}
+        </div>
+      </div>
+    )}
+  </div>
+);
+
+
 };
 
 export default Gallery;

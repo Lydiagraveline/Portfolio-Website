@@ -462,37 +462,25 @@ transition: opacity 200ms ease-in-out;
 /* Modal content */
 .modalContent {
   background-color: var(--light1);
-  /* border: 1px solid red; */
   z-index: 9999;
-  /* position: sticky; */
   position: fixed;
-  /* top:0; */
-  /* height: 100%; */
-  max-width: 80%; /* Set maximum width */
-  max-height: calc(100vh - 40px); /* Set maximum height to 100% of 
-  /* padding: 20px; */
-  /* width: 100%; */
-  /* overflow-y: auto;  */
-  /* overflow-x: hidden; */
-  overflow:hidden;
-  display: flex; /* Use flexbox */
+  max-width: 80%;
+  max-height: calc(100vh - 40px); 
+  /* height: 100vh; */
+  overflow: scroll;
+  display: flex;
   flex-direction: column;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  justify-content: flex-start;
+  /* justify-content: center; */
+  /* align-items: center; */
 }
 
 /* Image in modal */
 .modalContent img {
-  max-width: 100%; 
-  max-height: 80vh; 
-  /* padding: 10px; */
-  /* width: 100vw; */
-  /* max-width: 80vw; */
-  
-  /* height: 100vh; */
-  /* display: block;  */
-  /* cursor: url(./x.svg), pointer !important; */
-  
+  /* margin: 10px; */
+  width: 100%;
+  max-height: calc(60vh);
+  object-fit: contain;
 }
 
 /* Art piece information */
@@ -535,6 +523,29 @@ transition: opacity 200ms ease-in-out;
   margin-bottom: 40px;
 }
 
+.imageNavigation {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.prevButton, .nextButton {
+  background-color: var(--purple2);
+  padding: 10px 20px;
+  font-size: 16px;
+  /* color: #fff; */
+  border: none;
+  /* border-radius: 5px; */
+  cursor: pointer;
+}
+
+.prevButton:hover, .nextButton:hover {
+  background-color: var(--accent);
+  color: var(--light1);
+}
+
+
+
 
 /* Close button */
 .modalContent button {
@@ -546,4 +557,8 @@ transition: opacity 200ms ease-in-out;
   font-size: 16px;
   padding: 8px 16px;
   margin-top: 16px; */
+}
+
+.no-scroll {
+  overflow: hidden;
 }

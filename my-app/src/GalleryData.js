@@ -17,7 +17,7 @@ export const GalleryData = [
     "category": "digital",
     "medium": "Polycam, TouchDesigner, Photoshop",
     "folder": "PixelPaintings",
-    "photos": ['01.jpg','02.jpg','03`.jpg','04.jpg'],
+    "photos": ['01.jpg','02.jpg','03.jpg','04.jpg'],
     "description": "Four digital images, printed on smooth fine art paper, 18x24inch each."
   },
   {
