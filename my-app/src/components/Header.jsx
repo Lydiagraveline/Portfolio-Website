@@ -71,7 +71,7 @@ const Header = ({ categories, selectedCategory, handleFilterChange, handleAboutC
               "about-hidden": isHidden
             }) }>
             <div className="profilePic">
-              <img src="/images/profile.png" alt="Lydia Graveline" />
+              <img src="/images/profile.png" alt="Lydia Graveline" loading="lazy"/>
             </div>
             <div className="bio">
               <p>Visual Artist, designer, sound artist, and DJ. Originally from Baltimore Maryland, now based in Montreal, where I’m completing a BFA in Computation Arts at Concordia (graduating in 2025).</p>

@@ -69,6 +69,7 @@ body {
   font-family: compagnon-roman;
 }
 
+
 .header {
   background-color: var(--light1);
   flex-direction: column;
@@ -373,23 +374,32 @@ em:hover{
   }
 }
 
-
 .galleryItem {
   /* display: flex; 
   flex-direction: column;
   align-items: center;  */
   /* flex: 0 1 calc(33.33% - 20px); */
   background-color: var(--light1);
+  /* background-color: var(--purple2); */
   border: solid 1.5px var(--dark3);
   /* padding: 0px; */
   /* height: 33vh;  */
-
   overflow: hidden;
   display: flex;
   align-items: center; /* Center items vertically */
+  
+  background-size: cover;
+  background-position: center;
+  /* background-image: url('../public/images/lily-small.png'); */
+  /* width: 100%;
+  height: 100%;
+  object-fit: cover;
+  flex: 1; */
+  /* height: 100%; */
   /*display: flex;
   flex-direction: column; */
   /* height: auto; */
+  /* object-fit: cover; */
 }
 
 @media screen and (max-width: 32em) {
@@ -418,11 +428,21 @@ em:hover{
 }
 
 .galleryItem img{
-  display: block; 
+  /* display: block;  */
   width: 100%;
-  height: auto;
-  object-fit: contain; /* Ensure the entire image fits within the container */
+  height: 100%;
+  /* width: auto; */
+  /* height: auto; */
+  /* object-fit: contain;  */
+
+  object-fit: cover;
   object-position: center; /* Center the image */
+  opacity: 0;
+}
+
+.galleryItem img.loaded{
+opacity: 1;
+transition: opacity 200ms ease-in-out;
 }
 
 /* Modal background */

@@ -13,6 +13,20 @@ const Gallery = ({ galleryData,  collection, handleFilterChange,  selectedCatego
   };
 
   useEffect(() => {
+    const images = document.querySelectorAll('.galleryItem img');
+
+    images.forEach(img => {
+      if (img.complete) {
+        img.classList.add('loaded');
+      } else {
+        img.addEventListener("load", () => {
+          img.classList.add('loaded');
+        });
+      }
+    });
+  
+    
+    
     galleryData.forEach((item, index) => {
       if (item.photos) {
         handleImageArray(item, index); // Pass index as identifier
@@ -44,19 +58,39 @@ const Gallery = ({ galleryData,  collection, handleFilterChange,  selectedCatego
     }));
   };
 
+  // const handleBlur = document.querySelector('.galleryItem')
+  //   handleBlur.forEach(div => {
+  //     const img = div.querySelector('img')
+
+  //     function loaded( ) {
+  //       div.classList.add('loaded')
+  //     }
+      
+  //     if (img.complete) {
+  //       loaded ()
+  //     } {
+  //       img.addEventListener("load", loaded()
+  //       )
+  //     }
+
+  //   })
+
 
   return (
     <div className='gallery'  >
       <div className='container'>
         {galleryData.map((item, index) =>
-          <div className='galleryItem' key={index} onClick={() => handleImageClick(item)}>
+          <div className='galleryItem' style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/images/${item.key}-small.jpg)` }} key={index} onClick={() => handleImageClick(item)}>
             {/* display image here */}
-            {item.folder && imageSources[index] && (
-              <img src={imageSources[index]} alt={item.title} />
-            )}
-            {!item.folder && (
-              <img src={`../images/${item.image}`} alt={item.title} />
-            )}
+            {/* {item.folder && imageSources[index] && (
+              // <img src={imageSources[index]} alt={item.title} loading="lazy"/>
+              <img src={`../images/${item.folder}/${item.key}`} alt={item.title} loading="lazy"/>
+            )} */}
+            {/* {!item.folder && ( */}
+            <img src={`../images/${item.key}.jpg`} alt={item.title} loading="lazy" onError={(e) => {
+               e.target.src = `../images/${item.key}.gif`;
+            }}/>
+            {/* )} */}
             {/* <p>{item.medium}</p> */}
           </div>
         )}
@@ -68,14 +102,11 @@ const Gallery = ({ galleryData,  collection, handleFilterChange,  selectedCatego
                     <div className="modalContent">
                     {/* <img src={`../images/${clickedImage.image}`} /> */}
                     {clickedImage.folder && imageSources[galleryData.indexOf(clickedImage)] && (
-        <img src={imageSources[galleryData.indexOf(clickedImage)]} alt={clickedImage.title} />
+        <img src={imageSources[galleryData.indexOf(clickedImage)]} alt={clickedImage.title} loading="lazy"/>
       )}
       {!clickedImage.folder && (
-        <img src={`../images/${clickedImage.image}`} alt={clickedImage.title} />
+        <img src={`../images/${clickedImage.image}`} alt={clickedImage.title} loading="lazy"/>
       )}
-
-
-
 
                         <div className="artPieceInfo">
                             <h2>{clickedImage.title}</h2>
