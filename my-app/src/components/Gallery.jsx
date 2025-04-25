@@ -5,6 +5,8 @@ const Gallery = ({ galleryData,  collection, handleFilterChange,  selectedCatego
   const [clickedImage, setClickedImage] = useState(null);
   // const [imageSources, setImageSources] = useState({}); // State to store image sources for each item
   const [currentIndex, setCurrentIndex] = useState(0);
+  // const [imagesLoaded, setImagesLoaded] = useState(false);
+  // const [galleryData, setGalleryData] = useState([]);
   const handleImageClick = (item) => {
     setClickedImage(item);
     setCurrentIndex(0);
@@ -33,15 +35,15 @@ const Gallery = ({ galleryData,  collection, handleFilterChange,  selectedCatego
   useEffect(() => {
     const images = document.querySelectorAll('.galleryItem img');
 
-    images.forEach(img => {
-      if (img.complete) {
-        img.classList.add('loaded');
-      } else {
-        img.addEventListener("load", () => {
-          img.classList.add('loaded');
-        });
-      }
-    });
+    // images.forEach((img) => {
+    //   if (img.complete) {
+    //     img.classList.add('loaded');
+    //   } else {
+    //     img.onload = () => {
+    //       img.classList.add('loaded');
+    //     };
+    //   }
+    // });
 
     const body = document.body;
     if (clickedImage) {
@@ -82,15 +84,14 @@ const Gallery = ({ galleryData,  collection, handleFilterChange,  selectedCatego
     <div className='gallery'  >
       <div className='container'>
         {galleryData.map((item, index) =>
-          <div className='galleryItem' style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/images/${item.key}-small.jpg)` }} key={index} onClick={() => handleImageClick(item)}>
-            {/* display image here */}
-            {/* {item.folder && imageSources[index] && (
-              // <img src={imageSources[index]} alt={item.title} loading="lazy"/>
-              <img src={`../images/${item.folder}/${item.key}`} alt={item.title} loading="lazy"/>
-            )} */}
-            {/* {!item.folder && ( */}
-            <img src={`../images/${item.key}.jpg`} alt={item.title} loading="lazy" onError={(e) => {
-               e.target.src = `../images/${item.key}.gif`;
+         
+         <div className='galleryItem' 
+          style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/images/${item.key}-small.jpg)` }} key={index}  // temporary while loading
+          onClick={() => handleImageClick(item)}> 
+            <img src={`../images/${item.key}.jpg`} alt={item.title}   
+             onLoad={(e) => e.target.classList.add('loaded')} // Add 'loaded' class when image is loaded
+            onError={(e) => {
+            e.target.src = `../images/${item.key}.gif`;
             }}/>
             {/* )} */}
             {/* <p>{item.medium}</p> */}

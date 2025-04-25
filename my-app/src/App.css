@@ -442,7 +442,8 @@ em:hover{
 
 .galleryItem img.loaded{
 opacity: 1;
-transition: opacity 200ms ease-in-out;
+transition: opacity 600ms ease-in-out;
+
 }
 
 /* Modal background */
