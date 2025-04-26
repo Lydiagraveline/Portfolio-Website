@@ -1,5 +1,33 @@
 export const GalleryData = [
   {
+    "title": "Layered Diptych",
+    "key": "layeredDiptych",
+    "year": 2025,
+    "category": "analog",
+    "medium": "Oil on wooden panels, double sided laser engraved acrylic",
+    "folder": "layeredDiptych",
+    "photos": ['01.jpg','02.gif','03.gif'],
+    "description": ""
+  },
+  {
+    "title": "Tulips Animated",
+    "key": "tulipsVid",
+    "year": 2025,
+    "category": "digital",
+    "medium": "Polycam, Blender, TouchDesigner",
+    "folder": "tulipsVid",
+    "photos": ['01.gif','02.gif','03.gif', '04.gif', '05.gif'],
+    "description": "3D scans of a tulip bouquet captured daily, animated in Blender. Used for video projection installations. Converted to GIF for web display"
+  },
+  {
+    "title": "Latent Space",
+    "key": "latentspace",
+    "year": 2025,
+    "category": "analog",
+    "medium": "Oil on canvas, Stable Diffusion, Photoshop",
+    "description": "Collaborative painting with AI. AI-generated variations of a childhood photo used to create a distorted reference image; original photo elements collaged back in before painting."
+  },
+  {
     "title": "Tulip Prints",
     "key": "tulipPrints",
     "year": 2024,
@@ -9,6 +37,28 @@ export const GalleryData = [
     "photos": ['01.jpg','02.jpg','03.jpg'],
     "description": "Four digital images, printed on smooth fine art paper,  17x22inches each."
   },
+  // {
+  //   "title": "Jamais Vu",
+  //   "key": "jamaisVu",
+  //   "year": 2024,
+  //   "category": "digital",
+  //   "medium": "Polycam, Photoshop",
+  //   "folder": "tulipPrints",
+  //   "photos": ['01.jpg','02.jpg','03.jpg'],
+  //   "description": "Four digital images, printed on smooth fine art paper,  17x22inches each."
+  // },
+
+  {
+    "title": "Jamais Vu",
+    "key": "jamaisVu",
+    "year": 2024,
+    "category": "digital",
+    "link": "https://www.jamaisvu.app/",
+    "folder": "jamaisVu",
+    "photos": ['01.jpg','02.jpg'],
+    "medium": "Multimedia installation: video projection, soundscape, web app",
+    "description": "In collaboration with Rebecca, Kamyar, Azhar, Noah Kornberg, Louis Barbier. The project seeks to disrupt habitual familiarity with our increasingly highly digitized world, in which more and more aspects of our lives are being tracked, measured, and converted into data, reducing people from complex individuals into quantifiable units of information. We aimed to evoke this sensation by creating a (syn)aesthetic installation featuring a soundscape composed of crowdsourced audio samples from across the city of Montreal. Exhibited at Nodes.Noeuds – Société des arts technologiques (SAT), Montréal, QC, April 2025 and Art Matters: Mingled Memories – NOMAD, Montréal, QC, March 2025."
+  },
 
   {
     "title": "Pixel Paintings",
@@ -17,8 +67,8 @@ export const GalleryData = [
     "category": "digital",
     "medium": "Polycam, TouchDesigner, Photoshop",
     "folder": "PixelPaintings",
-    "photos": ['01.jpg','02.jpg','03.jpg','04.jpg'],
-    "description": "Four digital images, printed on smooth fine art paper, 18x24inch each."
+    "photos": ['01.jpg','02.jpg','03.jpg','04.jpg', '05.jpg'],
+    "description": "Four digital images, printed on smooth fine art paper, 18x24inch each. Exhibited at Nodes.Noeuds – Société des arts technologiques (SAT), Montréal, QC, April 2025"
   },
   {
     "title": "Meeting Through",

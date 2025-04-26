@@ -1,3 +1,8 @@
+Blurry image palceholder command:
+ffmpeg -i imageName.jpg -vf scale=20:-1 imageName-small.jpg
+
+ffmpeg -i jamaisVu.jpg -vf scale=20:-1 jamaisVu-small.jpg
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

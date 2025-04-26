@@ -92,7 +92,12 @@ const Gallery = ({ galleryData,  collection, handleFilterChange,  selectedCatego
              onLoad={(e) => e.target.classList.add('loaded')} // Add 'loaded' class when image is loaded
             onError={(e) => {
             e.target.src = `../images/${item.key}.gif`;
-            }}/>
+            e.target.onerror = () => {
+              // console.error(`No image available for ${item.key}`);
+              e.target.alt = 'No image available';
+              e.target.src = `../images/lily.jpg`;
+            };
+           }}/>
             {/* )} */}
             {/* <p>{item.medium}</p> */}
           </div>
